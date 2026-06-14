@@ -36,6 +36,7 @@ svc-cost-guardian = { workspace = true }
 target-version = "py312"
 line-length = 100
 src = ["packages/*/src", "services/*/src"]
+exclude = ["scripts/"]
 
 [tool.ruff.lint]
 select = [
