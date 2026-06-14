@@ -1,0 +1,6 @@
+# Copie para terraform.tfvars e preencha
+project_id           = "SEU-PROJECT-ID"
+region               = "us-central1"
+budget_monthly_usd   = 120
+billing_account_name = "Minha Conta de Billing"
+environment          = "sandbox"

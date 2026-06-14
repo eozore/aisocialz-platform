@@ -1,0 +1,20 @@
+[project]
+name = "render-client"
+version = "0.1.0"
+description = "Cliente do svc-render (tipos de request/response)"
+requires-python = ">=3.12"
+dependencies = [
+    "core-domain",
+    "httpx>=0.27",
+    "pydantic>=2.7",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/render_client"]
+
+[tool.uv.sources]
+core-domain = { workspace = true }

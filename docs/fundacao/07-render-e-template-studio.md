@@ -64,5 +64,5 @@ Funcionalidades:
 ## 4. Para a IA construtora
 
 - Implementar o serviço de render como API única (`render(template_id, versao, dados, formato_saida)`) usada por Designer, Editor de vídeo (overlays), Studio e sandbox — um só caminho de render no sistema inteiro.
-- Fase 2 (doc 06) passa a incluir o Template Studio em versão mínima (galeria + preview + edição por código). Edição por chat e comparação antes/depois podem vir na Fase 4.
+- Fase 1 (doc 09 §7) passa a incluir o Template Studio em versão mínima (galeria + preview + edição por código). Edição por chat e comparação antes/depois podem vir na Fase 2.
 - Migrar o padrão atual do Victor (build script Python de HTML autocontido) para este formato de template com manifest — aproveitar os HTMLs já criados como primeiros templates do éozoré.

@@ -1,0 +1,94 @@
+name: Deploy — Cloud Run por path
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "services/**"
+      - "packages/**"
+
+env:
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  REGION: ${{ vars.GCP_REGION || 'us-central1' }}
+  # Sandbox flag — doc 01 §5
+  ENVIRONMENT: ${{ vars.ENVIRONMENT || 'sandbox' }}
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      agents: ${{ steps.filter.outputs.agents }}
+      render: ${{ steps.filter.outputs.render }}
+      publisher: ${{ steps.filter.outputs.publisher }}
+      cockpit_api: ${{ steps.filter.outputs.cockpit_api }}
+      cost_guardian: ${{ steps.filter.outputs.cost_guardian }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            agents:
+              - 'services/agents/**'
+              - 'packages/**'
+            render:
+              - 'services/render/**'
+              - 'packages/core_domain/**'
+              - 'packages/render_client/**'
+            publisher:
+              - 'services/publisher/**'
+              - 'packages/adapters/**'
+              - 'packages/core_domain/**'
+              - 'packages/persistence/**'
+            cockpit_api:
+              - 'services/cockpit_api/**'
+              - 'packages/**'
+            cost_guardian:
+              - 'services/cost_guardian/**'
+              - 'packages/core_domain/**'
+              - 'packages/persistence/**'
+
+  deploy-agents:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.agents == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy svc-agents (placeholder)
+        run: echo "TODO — deploy svc-agents to Cloud Run"
+
+  deploy-render:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.render == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy svc-render (placeholder)
+        run: echo "TODO — deploy svc-render to Cloud Run"
+
+  deploy-publisher:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.publisher == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy svc-publisher (placeholder)
+        run: echo "TODO — deploy svc-publisher to Cloud Run"
+
+  deploy-cockpit-api:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.cockpit_api == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy svc-cockpit-api (placeholder)
+        run: echo "TODO — deploy svc-cockpit-api to Cloud Run"
+
+  deploy-cost-guardian:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.cost_guardian == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy svc-cost-guardian (placeholder)
+        run: echo "TODO — deploy svc-cost-guardian to Cloud Run"

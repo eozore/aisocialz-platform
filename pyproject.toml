@@ -1,0 +1,81 @@
+[project]
+name = "aisocialz-platform"
+version = "0.1.0"
+description = "Plataforma de marketing orgânico operada por agentes de IA"
+requires-python = ">=3.12"
+readme = "README.md"
+
+[tool.uv.workspace]
+members = [
+    "packages/*",
+    "services/*",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.8",
+    "mypy>=1.13",
+]
+
+[tool.uv.sources]
+core-domain = { workspace = true }
+persistence = { workspace = true }
+llm-gateway = { workspace = true }
+adapters = { workspace = true }
+render-client = { workspace = true }
+observability = { workspace = true }
+svc-agents = { workspace = true }
+svc-render = { workspace = true }
+svc-publisher = { workspace = true }
+svc-cockpit-api = { workspace = true }
+svc-cost-guardian = { workspace = true }
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["packages/*/src", "services/*/src"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "TCH",  # flake8-type-checking
+]
+
+[tool.ruff.lint.isort]
+known-first-party = [
+    "core_domain",
+    "llm_gateway",
+    "persistence",
+    "adapters",
+    "render_client",
+    "observability",
+]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = "google.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "vertexai.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["packages", "services", "tests"]
+asyncio_mode = "auto"

@@ -42,7 +42,7 @@
 - Respostas automáticas seguem a voz da marca (few-shot + anti-padrões) e são curtas; o Comunidade NUNCA promete, NUNCA discute, NUNCA responde crítica automaticamente.
 - O Analista trata respostas como conteúdo: mede reação e aprende quais classes de resposta funcionam.
 - **Defaults de partida:** éozoré `modo: manual` por 30 dias (calibração do score contra as decisões do Victor → o limiar real nasce dos dados), depois `auto`. AINewz pode nascer `auto` com limiar 0.85 (volume maior, tom informativo, menos pessoal).
-- *Fase de implementação: 4.*
+- *Fase de implementação: 1 (doc 09 §7 prevalece sobre menções anteriores).*
 
 ## 2. Gestão de crise — score de severidade + kill switch
 
@@ -59,7 +59,7 @@
 - **Retratação/errata pública é SEMPRE manual** — a plataforma redige a errata no tom da marca e deixa pronta na fila, mas só o Victor publica. Errar a correção é pior que errar o post.
 - **Kill switch no cockpit:** botão por peça que despublica/oculta em todos os canais de uma vez + congela derivados; e um botão global por marca ("pausar tudo da marca X") para crise maior.
 - Todo evento de crise entra no decision_log com resultado observado — vira aprendizado.
-- *Fase: mecanismo de kill switch na Fase 2 (junto com adapters reais); monitoramento e score na Fase 4.*
+- *Fase: mecanismo de kill switch na Fase 1 (junto com adapters reais); monitoramento e score automático de severidade na Fase 2.*
 
 ## 3. Guardrail de prompt injection (conteúdo externo)
 

@@ -33,15 +33,17 @@ Você está no meio da construção de uma plataforma multi-agente (Diretor + 7 
 
 > **Contrato anti-atalho (doc 09 §2):** nenhuma lógica de marca/canal/usuário em código ou prompt. Toda query carrega `tenant_id` + `brand_id`. Recursos globais (`platform/`) separados de recursos de tenant desde o dia 1. Violar isso para "funcionar mais rápido pro Victor" é o erro mais caro possível — inviabiliza o SaaS sem reescrita.
 
-**Fase 0 — Fundação (sem conteúdo novo).** Inventário; wrapper LLM + ledger + budget + guardião + flag `platform_status`; schemas do doc 02 criados; migração do estado existente; refactor "estratégia fora dos prompts"; brands/strategies dos docs 04/02 carregados (com `[PREENCHER]` pendentes listados para o Victor). *Pronto quando:* uma chamada de teste aparece no ledger, os modos trocam nos gatilhos simulados, e os agentes existentes leem estratégia de Firestore.
+**Fase 0 — Fundação (sem conteúdo novo).** Inventário; wrapper LLM + ledger + budget + guardião + flag `platform_status`; schemas do doc 02 criados; migração do estado existente; refactor "estratégia fora dos prompts"; brands/strategies dos docs 04/02 carregados (com `[PREENCHER]` pendentes listados para o Victor). *Pronto quando:* uma chamada de teste aparece no ledger, os modos trocam nos gatilhos simulados, e os agentes leem estratégia de Firestore.
 
-**Fase 1 — Memória e trilha autônoma de texto (éozoré em sandbox).** Grafo de conteúdo + backfill do conteúdo já publicado do Victor (ele fornece URLs/exports); retrieval no Redator; Revisor como gate; ciclo completo em sandbox: planejamento → produção de posts/threads → revisão → publicação simulada → preview no cockpit. *Pronto quando:* um post simulado referencia corretamente um conteúdo antigo do grafo com link acionável.
+> **As "definições de pronto" abaixo (originalmente fases 1–4) permanecem como CRITÉRIO DE QUALIDADE, mas o agrupamento canônico em fases é o do doc 09 §7 (Fase 1 = LinkedIn+Meta+Blog+GA + fundação; Fase 2 = YouTube+TikTok+Email + maturidade). Mapeamento abaixo.**
 
-**Fase 2 — Visual + AINewz.** Templates HTML das duas marcas + render Puppeteer; evento cross-project + score editorial + produção de cards/carrosséis do AINewz em sandbox; adapters reais de IG/Threads; promoção a produção dos canais de menor risco (Threads, blog) com aprovação do Victor.
+**Pertencem à Fase 1 (canônica):**
+- *Memória e trilha autônoma de texto.* Grafo + backfill do conteúdo publicado (Victor fornece URLs/exports); retrieval no Redator; Revisor como gate; ciclo em sandbox: planejamento → produção → revisão → publicação simulada → preview no cockpit. *Pronto quando:* um post simulado referencia corretamente um conteúdo antigo do grafo com link acionável.
+- *Visual + AINewz.* Templates HTML + render Puppeteer; evento cross-project + score editorial + cards/carrosséis do AINewz; adapters reais LinkedIn/Meta/Blog; acervo de mídia; catálogo de formatos; Google Analytics; Comunidade (doc 08 §1); Analista em modo **coleta** (métricas + schema de learnings + atribuição básica) — o ciclo científico completo é Fase 2; promoção a produção dos canais de menor risco com aprovação do Victor.
 
-**Fase 3 — Vídeo e trilha colaborativa.** Pipeline do bucket (transcrição → atom → cortes → derivados); Roteirista + fila do CEO + sessão a 4 mãos no cockpit; adapter YouTube.
-
-**Fase 4 — Inteligência.** Analista completo (coleta diária, learnings, experimentos); Crítico no planejamento; retro semanal + curadoria de memórias + relatório do CEO; decision log alimentado pelo cockpit; "modo férias".
+**Pertencem à Fase 2 (canônica):**
+- *Vídeo e trilha colaborativa.* Pipeline do bucket (transcrição → atom → cortes → derivados); Roteirista + fila do CEO + sessão a 4 mãos no cockpit; adapters YouTube e TikTok; Email.
+- *Inteligência (maturidade).* Analista **completo** (experimentos nos ~20% de slots, retros, promoção/expiração de learnings); **Crítico** no planejamento; retro semanal + curadoria de memórias + relatório do CEO; decision log alimentado pelo cockpit; "modo férias"; time de revisão de templates (proposta automática).
 
 ## 4. Definição de pronto (toda fase)
 
@@ -49,10 +51,10 @@ Checagem dupla: (a) funcional — o demo roda fim-a-fim em sandbox; (b) sistêmi
 
 ## 5. Perguntas abertas que exigem o Victor (não decidir sozinha)
 
-> Resolvidas no doc 08: comunidade (auto/manual + score), crise (score de severidade + kill switch), guardrail de injection, compliance editorial (escopo do AINewz), tokens/quotas, golden set + regra do legado, orçamento build vs operação, backup semanal. Restam:
+> Resolvidas no doc 08: comunidade (auto/manual + score), crise (score de severidade + kill switch), guardrail de injection, compliance editorial (escopo do AINewz), tokens/quotas, golden set + regra do legado, orçamento build vs operação, backup semanal. Demais resoluções:
 
-1. Postiz atrás do contrato adapter no MVP, ou adapters diretos desde já?
+1. ~~Postiz vs adapters diretos~~ **RESOLVIDO: adapters diretos, sem Postiz.** O Victor já tem tokens testados e código de postagem funcional (LinkedIn, Meta, Blog) — o Postiz substituiria o que já existe e adicionaria dependência self-hosted + indireção no caminho crítico. O código de teste do Victor é a base dos adapters.
 2. ~~CTA de fundo de funil~~ **RESOLVIDO:** fase inicial = crescimento de audiência (éozoré: seguidores/inscritos; AINewz: assinantes da newsletter). `objetivo_de_conversao.tipo = "audiencia"` (doc 02). Quando houver produto (mentoria/curso), trocar para `"receita"` sem refatorar.
 3. Curadoria do few-shot de voz: quais peças do legado recebem `few_shot_aprovado: true` (doc 08 §6) — apenas as que o Victor marcar; e exports para backfill do grafo.
 4. Hexas da paleta, tipografia e handles/URLs `[PREENCHER]` do doc 04.
-5. Mecanismo atual de LinkedIn/newsletter do AINewz: manter como está e só adicionar formatos novos, ou migrar para os adapters deste projeto?
+5. ~~LinkedIn/newsletter do AINewz~~ **RESOLVIDO: preservar o que existe; só adicionar formatos novos.** O publicador de LinkedIn e a newsletter do projeto AINewz continuam intactos (não reescrever o que funciona, doc 06 §1). Esta plataforma, na Fase 1, publica no LinkedIn do AINewz **apenas formatos que o caminho atual não cobre** (ex.: carrossel-PDF); o post de notícia padrão segue pelo publicador existente. Evita duplicação. Consolidar tudo aqui é decisão futura, não da Fase 1.

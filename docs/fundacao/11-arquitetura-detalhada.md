@@ -462,8 +462,12 @@ Scheduler (dom 18h) -> orchestration.weekly_planning(scope por marca ativa):
 ```
 Fase 0: monorepo + core_domain + persistence(scope) + llm_gateway(ledger) + infra base + migrations
 Fase 1: adapters(linkedin/meta/blog) + render + vector + agentes(core+radar+curador+revisor+comunidade)
-        + cockpit_api + cockpit V1 + acervo + catálogo de formatos + GA
-Fase 2: adapters(youtube/tiktok) + editor_video + email + time de revisão de templates (proposta auto)
+        + analista(MODO COLETA: métricas+GA+schema learnings) + cockpit_api + cockpit V1
+        + acervo + catálogo de formatos
+        # SEM Crítico e SEM ciclo científico do Analista nesta fase
+Fase 2: adapters(youtube/tiktok) + email + editor_video + trilha colaborativa(roteirista+fila CEO)
+        + Crítico + analista(CICLO COMPLETO: experimentos+retros+promoção de learnings)
+        + time de revisão de templates (proposta automática)
 ```
 
 ## 13. Decisões de arquitetura registradas (ADRs)
