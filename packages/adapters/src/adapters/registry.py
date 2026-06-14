@@ -4,7 +4,9 @@ Um time inativo é invisível — registry recusa entregar adapter.
 """
 
 from adapters.base import ChannelAdapter
+from adapters.blog import BlogAdapter
 from adapters.credentials import CredentialResolver
+from adapters.linkedin import LinkedInAdapter
 from adapters.meta import MetaFacebookAdapter, MetaInstagramAdapter, MetaThreadsAdapter
 from core_domain import Canal, TeamId, TeamInactiveError
 
@@ -36,7 +38,8 @@ class AdapterRegistry:
             Canal.INSTAGRAM: MetaInstagramAdapter(credential_resolver),
             Canal.THREADS: MetaThreadsAdapter(credential_resolver),
             Canal.FACEBOOK: MetaFacebookAdapter(credential_resolver),
-            # LinkedIn e Blog serão adicionados
+            Canal.LINKEDIN: LinkedInAdapter(credential_resolver),
+            Canal.BLOG: BlogAdapter(credential_resolver),
         }
 
     def get_adapter(self, canal: Canal) -> ChannelAdapter:
