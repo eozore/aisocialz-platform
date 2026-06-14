@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+    font-family: var(--font-family, 'Inter', sans-serif);
+    background: var(--bg-color, #F5F0EB);
+    color: var(--text-color, #2D2D2D);
+  }
+  .titulo {
+    font-size: 56px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-color, #C05A3C);
+    line-height: 1.2;
+  }
+  .corpo {
+    font-size: 36px;
+    text-align: center;
+    line-height: 1.5;
+    max-width: 900px;
+  }
+  .numero {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    font-size: 28px;
+    opacity: 0.5;
+  }
+  .cta {
+    margin-top: 60px;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--primary-color, #C05A3C);
+  }
+</style>
+</head>
+<body>
+  <div class="titulo">{{titulo}}</div>
+  <div class="corpo">{{corpo}}</div>
+  <div class="numero">{{numero_pagina}}</div>
+  <div class="cta">{{cta_final}}</div>
+</body>
+</html>
