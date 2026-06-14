@@ -1,0 +1,16 @@
+{
+  "template_id": "base_tipografico",
+  "brand": "_base",
+  "formato": "carrossel",
+  "dimensoes": {"largura": 1080, "altura": 1350},
+  "paginas": "1-10",
+  "variaveis": [
+    {"nome": "titulo", "tipo": "texto", "max_chars": 60},
+    {"nome": "corpo", "tipo": "texto_rico", "max_chars": 280},
+    {"nome": "numero_pagina", "tipo": "auto"},
+    {"nome": "cta_final", "tipo": "texto", "max_chars": 40}
+  ],
+  "status": "aprovado",
+  "versao": "1.0.0",
+  "nota": "Template base tipográfico brandável — recebe paleta/tipografia da marca em runtime"
+}

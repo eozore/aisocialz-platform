@@ -1,0 +1,16 @@
+{
+  "template_id": "base_noticia",
+  "brand": "_base",
+  "formato": "card",
+  "dimensoes": {"largura": 1080, "altura": 1350},
+  "paginas": "1",
+  "variaveis": [
+    {"nome": "titulo", "tipo": "texto", "max_chars": 80},
+    {"nome": "resumo", "tipo": "texto", "max_chars": 200},
+    {"nome": "fonte", "tipo": "texto", "max_chars": 50},
+    {"nome": "data", "tipo": "texto", "max_chars": 20}
+  ],
+  "status": "aprovado",
+  "versao": "1.0.0",
+  "nota": "Template base para card de notícia — usado pelo AINewz"
+}
