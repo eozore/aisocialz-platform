@@ -1,4 +1,4 @@
-"""Curador / Editor-chefe — curadoria de notícias AINewz (doc 03 §3).
+"""Curador / Editor-chefe — curadoria de notícias de fontes externas (doc 03 §3).
 
 Decide o que de cada fluxo de notícias vira o quê:
 - Nível sério: newsletter e LinkedIn
@@ -7,7 +7,7 @@ Decide o que de cada fluxo de notícias vira o quê:
 Guardrail de injection (doc 08 §3) sempre ativo — notícia é dado externo.
 
 Modelo: Flash (scoring) + Sonnet (ângulo editorial)
-Time: core (para AINewz) — ativação via team_subscriptions
+Time: core — ativação via team_subscriptions
 """
 
 from agents.base import PlatformAgent

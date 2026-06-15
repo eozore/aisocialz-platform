@@ -19,7 +19,7 @@ class ScopedRepository:
     """Repositório genérico com escopo de tenant obrigatório.
 
     Uso:
-        scope = TenantScope(tenant_id="victor", brand_id="eozore")
+        scope = TenantScope(tenant_id="example", brand_id="brand1")
         repo = ScopedRepository(db, scope, BacklogItem, "backlog")
         item = await repo.get("item-123")
     """

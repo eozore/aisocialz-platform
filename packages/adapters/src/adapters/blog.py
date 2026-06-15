@@ -1,13 +1,13 @@
-"""Blog adapter — publicação via API HTTP do site próprio (éozoré) ou commit.
+"""Blog adapter — publicação via API HTTP do site próprio ou commit.
 
 Formato das credenciais no Secret Manager (JSON):
 {
-    "api_url": "https://eozore.com/api/posts",  # endpoint de criação de post
+    "api_url": "https://example.com/api/posts",  # endpoint de criação de post
     "api_key": "sk-...",                          # chave de autenticação
     "method": "api"                               # "api" ou "git" (futuro)
 }
 
-Para AINewz, o blog/portal é gerido pelo projeto separado — este adapter
+Para marcas com portal externo, o blog/portal é gerido pelo projeto separado — este adapter
 só publica formatos novos que a plataforma gera (doc 06 §5.5).
 """
 

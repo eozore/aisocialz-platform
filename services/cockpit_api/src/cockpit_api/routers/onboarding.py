@@ -13,7 +13,7 @@ router = APIRouter(prefix="/api/onboarding", tags=["onboarding"])
 class CreateTenantRequest(BaseModel):
     """Dados para criar um novo tenant."""
 
-    tenant_id: str  # slug único (ex: "victor", "empresa-x")
+    tenant_id: str  # slug único (ex: "meu-tenant", "empresa-x")
     nome: str  # nome de exibição
     email: str
     budget_mensal_brl: float = 600.0
@@ -22,8 +22,8 @@ class CreateTenantRequest(BaseModel):
 class CreateBrandRequest(BaseModel):
     """Dados para criar uma nova marca dentro de um tenant."""
 
-    brand_id: str  # slug único (ex: "eozore", "ainewz")
-    nome: str  # nome de exibição (ex: "éozoré")
+    brand_id: str  # slug único (ex: "minha-marca", "outra-marca")
+    nome: str  # nome de exibição (ex: "Minha Marca")
     missao: str
     idioma: str = "pt-BR"
     nivel_de_franqueza: float = 0.9

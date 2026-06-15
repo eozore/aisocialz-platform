@@ -1,6 +1,6 @@
 """Meta adapter — Instagram (feed/carrossel/reels/stories) + Facebook Pages.
 
-Baseado no código de validação do Victor (tokens testados e funcionalidades confirmadas).
+Baseado em código de validação com tokens testados e funcionalidades confirmadas.
 Credenciais via Secret Manager, nunca hardcoded (doc 09 §8).
 Refresh programático de tokens obrigatório — expiram em ~60 dias (doc 08 §5).
 

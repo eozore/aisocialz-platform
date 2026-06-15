@@ -30,10 +30,10 @@ resource "google_service_account" "svc_cost_guardian" {
   project      = var.project_id
 }
 
-# SA para leitura cross-project do AINewz (doc 01 §1)
-resource "google_service_account" "sa_ainewz_reader" {
-  account_id   = "sa-ainewz-reader"
-  display_name = "Service Account — Leitor cross-project AINewz"
+# SA para leitura cross-project de eventos externos (doc 01 §1)
+resource "google_service_account" "sa_external_reader" {
+  account_id   = "sa-external-reader"
+  display_name = "Service Account — Leitor cross-project (eventos externos)"
   project      = var.project_id
 }
 

@@ -2,7 +2,7 @@
 
 Checklist:
 1. Voz: compara com few-shot + guia de voz negativo (anti-padrões)
-2. Factualidade: AINewz = toda afirmação rastreável à fonte
+2. Factualidade: marcas de notícias = toda afirmação rastreável à fonte
 3. Referências: conceito coberto no grafo → referência acionável presente
 4. Conformidade: limites do canal via adapter.validate()
 

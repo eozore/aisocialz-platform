@@ -27,7 +27,7 @@ class Scope(BaseModel):
 
 
 class Fonte(BaseModel):
-    tipo: str  # pauta | video | noticia_ainewz
+    tipo: str  # pauta | video | noticia_externa
     ref: str | None = None  # content_atom_id | noticia_id
 
 
@@ -116,7 +116,7 @@ class MediaAsset(BaseModel):
     id: str
     scope: Scope
     tipo: str  # imagem | video | logo
-    fonte: str  # humano_upload | agente_pesquisa | ainewz_noticia | video_ia_futuro
+    fonte: str  # humano_upload | agente_pesquisa | noticia_externa | video_ia_futuro
     url: str
     tags: list[str] = Field(default_factory=list)
     descricao: str = ""

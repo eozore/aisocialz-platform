@@ -29,8 +29,8 @@ app.include_router(onboarding_router)
 app.include_router(connections_router)
 app.include_router(voice_router)
 
-# V1: tenant fixo (Victor). Na virada SaaS, extraído do token JWT.
-DEFAULT_TENANT = "victor"
+# V1: tenant fixo até implementar auth. Na virada SaaS, extraído do token JWT.
+DEFAULT_TENANT = "default"
 
 
 def _get_tenant(request: Request) -> str:
