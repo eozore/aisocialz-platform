@@ -1,6 +1,7 @@
 variable "project_id" {
   description = "GCP project ID da plataforma de conteúdo"
   type        = string
+  default     = "aisocialz-project"
 }
 
 variable "region" {

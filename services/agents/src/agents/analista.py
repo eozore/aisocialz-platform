@@ -57,22 +57,32 @@ class AnalistaAgent(PlatformAgent):
             )
 
     async def _coletar_metricas(self, scope: Scope, req: AgentRequest) -> AgentResponse:
-        """Coleta métricas via adapters para posts publicados recentes.
+        """Coleta métricas via adapters + Google Analytics para posts publicados.
 
-        Na implementação completa:
+        Fluxo:
         1. Lê publications/ com status=publicado dos últimos N dias
-        2. Para cada, chama adapter.get_metrics(post_ref, scope)
-        3. Normaliza em Performance e atualiza content_graph
+        2. Para cada post de canal social, chama adapter.get_metrics(post_ref, scope)
+        3. Para posts de blog, chama Google Analytics (page views, users, conversões)
+        4. Normaliza em Performance e atualiza content_graph
+        5. Atribui performance às dimensões (pilar, formato, canal, dia)
         """
-        # Stub: na integração real, itera publications e chama adapters
+        # Stub: na integração real, itera publications e chama adapters + GA
         posts_coletados = 0
+
+        # GA: coleta métricas web se analytics_web estiver ativo
+        ga_report = None
+        ga_config = req.payload.get("ga_config", {})
+        if isinstance(ga_config, dict) and ga_config.get("ativo"):
+            # Na integração real: GoogleAnalyticsClient(real_client).get_page_metrics(...)
+            ga_report = {"nota": "GA4 ativo — conectar na integração com credenciais"}
+
         return AgentResponse(
             request_id=req.request_id,
             ok=True,
             output={
                 "posts_coletados": posts_coletados,
+                "ga_report": ga_report,
                 "timestamp": datetime.now(UTC).isoformat(),
-                "nota": "Conectar com persistence + adapters na integração",
             },
         )
 

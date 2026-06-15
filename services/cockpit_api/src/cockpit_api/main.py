@@ -7,6 +7,10 @@ Toda rota injeta tenant_id do token de auth (nunca do corpo).
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
+from cockpit_api.routers.connections import router as connections_router
+from cockpit_api.routers.onboarding import router as onboarding_router
+from cockpit_api.routers.voice import router as voice_router
+
 app = FastAPI(
     title="AISocialZ Cockpit API",
     description="BFF para o cockpit Next.js — endpoints normativos da V1",
@@ -19,6 +23,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Registra routers
+app.include_router(onboarding_router)
+app.include_router(connections_router)
+app.include_router(voice_router)
 
 # V1: tenant fixo (Victor). Na virada SaaS, extraído do token JWT.
 DEFAULT_TENANT = "victor"
