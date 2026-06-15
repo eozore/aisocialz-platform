@@ -30,6 +30,7 @@ version = "0.1.0"
 source = { editable = "packages/adapters" }
 dependencies = [
     { name = "core-domain" },
+    { name = "google-analytics-data" },
     { name = "google-cloud-secret-manager" },
     { name = "httpx" },
     { name = "persistence" },
@@ -39,6 +40,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "core-domain", editable = "packages/core_domain" },
+    { name = "google-analytics-data", specifier = ">=0.18" },
     { name = "google-cloud-secret-manager", specifier = ">=2.20" },
     { name = "httpx", specifier = ">=0.27" },
     { name = "persistence", editable = "packages/persistence" },
@@ -482,6 +484,22 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/4a/65/3ff3f50b10dac3323ddecd694515e9f9ed345886e0eaf666d0e42c90748b/google_adk-2.2.0.tar.gz", hash = "sha256:04cb6318aba8829fe7c941ee1b456ccb4745253898c13595708c9eb07b4582ff", size = 3391545, upload-time = "2026-06-04T22:15:12.9Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/64/f5/44a3b20b17bac130497f2d1dde8b93c90cfc026983cd94f24488d540ea70/google_adk-2.2.0-py3-none-any.whl", hash = "sha256:ebdf3d931dc2b9c5b30d995358fc2ae99d59594c48a4aaf7496869ccd2c5f245", size = 3912613, upload-time = "2026-06-04T22:15:15.411Z" },
+]
+
+[[package]]
+name = "google-analytics-data"
+version = "0.23.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-api-core", extra = ["grpc"] },
+    { name = "google-auth" },
+    { name = "grpcio" },
+    { name = "proto-plus" },
+    { name = "protobuf" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f8/09/76553c6ec3e277d38486f7619d8bad631745fb6bdd486027e956dea8a8c7/google_analytics_data-0.23.0.tar.gz", hash = "sha256:8799b8829ca175e11385008aedb9f2f0aaf5c78c2b69f7570712ee46b190b08a", size = 232484, upload-time = "2026-06-03T14:52:16.145Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/df/28/56dda8a3ba26c09a26592c1ae701f0092d9c0f8e620df073783dad733ddc/google_analytics_data-0.23.0-py3-none-any.whl", hash = "sha256:ba21edbe7f2aa61424651b11b06f81fa4ceed5db5581ef2ca2af0d189b77c0bd", size = 199547, upload-time = "2026-06-03T14:51:25.009Z" },
 ]
 
 [[package]]
