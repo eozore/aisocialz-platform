@@ -8,8 +8,16 @@
 
 import { useState } from "react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+  loading?: boolean;
+}
+
 export default function ChatPage() {
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>([
+  const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
       content:
@@ -17,16 +25,45 @@ export default function ChatPage() {
     },
   ]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
-    setMessages((prev) => [...prev, { role: "user", content: input }]);
-    // TODO: chamar /api/chat/diretor e adicionar resposta
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userMessage = input.trim();
+    setInput("");
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+    setIsLoading(true);
+
+    // Placeholder de loading
     setMessages((prev) => [
       ...prev,
-      { role: "assistant", content: "[Conectar ao svc-cockpit-api /api/chat/diretor]" },
+      { role: "assistant", content: "Pensando...", loading: true },
     ]);
-    setInput("");
+
+    try {
+      const res = await fetch(`${API_URL}/api/chat/diretor`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mensagem: userMessage }),
+      });
+      const data = await res.json();
+
+      setMessages((prev) => {
+        const withoutLoading = prev.filter((m) => !m.loading);
+        return [...withoutLoading, { role: "assistant", content: data.resposta }];
+      });
+    } catch (error) {
+      setMessages((prev) => {
+        const withoutLoading = prev.filter((m) => !m.loading);
+        return [
+          ...withoutLoading,
+          { role: "assistant", content: "Erro ao conectar com o Diretor. Tente novamente." },
+        ];
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -42,10 +79,10 @@ export default function ChatPage() {
               msg.role === "user"
                 ? "bg-orange-50 ml-auto border border-orange-200"
                 : "bg-white border border-gray-200"
-            }`}
+            } ${msg.loading ? "animate-pulse" : ""}`}
           >
             <div className="text-xs text-gray-500 mb-1">
-              {msg.role === "user" ? "Você" : "Diretor"}
+              {msg.role === "user" ? "Você (CEO)" : "Diretor de Marketing"}
             </div>
             <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
           </div>
@@ -60,13 +97,15 @@ export default function ChatPage() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
           placeholder="Fale com seu Diretor de Marketing..."
-          className="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300"
+          disabled={isLoading}
+          className="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 disabled:opacity-50"
         />
         <button
           onClick={handleSend}
-          className="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
+          disabled={isLoading}
+          className="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors disabled:opacity-50"
         >
-          Enviar
+          {isLoading ? "..." : "Enviar"}
         </button>
       </div>
     </div>

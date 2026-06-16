@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Plataforma de marketing orgânico operada por agentes de IA"
 requires-python = ">=3.12"
 readme = "README.md"
+dependencies = [
+    "google-genai>=2.8.0",
+]
 
 [tool.uv.workspace]
 members = [
@@ -37,6 +40,9 @@ target-version = "py312"
 line-length = 100
 src = ["packages/*/src", "services/*/src"]
 exclude = ["scripts/"]
+
+[tool.ruff.lint.per-file-ignores]
+"services/cockpit_api/src/cockpit_api/main.py" = ["E501"]
 
 [tool.ruff.lint]
 select = [

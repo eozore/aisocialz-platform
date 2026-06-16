@@ -1,23 +1,29 @@
 /**
- * Sala de contratação — doc 09 §3
- *
- * Times como módulos contratáveis. Ativar/desativar sem quebrar nada.
+ * Sala de contratação — consome API real.
  */
+"use client";
 
-const TEAMS = [
-  { id: "core", nome: "Core (Diretor, Estrategista, Revisor, Analista)", obrigatorio: true, ativo: true },
-  { id: "linkedin", nome: "LinkedIn", obrigatorio: false, ativo: true },
-  { id: "meta", nome: "Meta (Instagram + Facebook + Threads)", obrigatorio: false, ativo: true },
-  { id: "blog", nome: "Blog", obrigatorio: false, ativo: true },
-  { id: "radar", nome: "Radar (Contexto)", obrigatorio: false, ativo: true },
-  { id: "comunidade", nome: "Comunidade", obrigatorio: false, ativo: true },
-  { id: "analytics_web", nome: "Google Analytics", obrigatorio: false, ativo: true },
-  { id: "youtube", nome: "YouTube", obrigatorio: false, ativo: false },
-  { id: "tiktok", nome: "TikTok", obrigatorio: false, ativo: false },
-  { id: "email", nome: "Email / Newsletter", obrigatorio: false, ativo: false },
-];
+import { useEffect, useState } from "react";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+interface Team {
+  team_id: string;
+  nome: string;
+  ativo: boolean;
+  obrigatorio: boolean;
+}
 
 export default function TeamsPage() {
+  const [teams, setTeams] = useState<Team[]>([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/teams`)
+      .then((r) => r.json())
+      .then((data) => setTeams(data.teams || []))
+      .catch(() => {});
+  }, []);
+
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Times Contratados</h2>
@@ -26,9 +32,9 @@ export default function TeamsPage() {
       </p>
 
       <div className="space-y-3">
-        {TEAMS.map((team) => (
+        {teams.map((team) => (
           <div
-            key={team.id}
+            key={team.team_id}
             className="flex items-center justify-between bg-white rounded-lg border border-gray-200 p-4"
           >
             <div>
